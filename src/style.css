@@ -1,0 +1,86 @@
+@import "open-props/style";
+@import "open-props/normalize";
+@import "open-props/buttons";
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.header {
+  grid-area: header;
+}
+.container {
+  display: grid;
+  grid-template-areas: 
+    "sidebar notes notes"
+    "sidebar cards cards"
+  ;}
+.main {
+  outline: 1px solid blue;
+  padding-inline: var(--size-fluid-3);
+}
+.note-form-container{
+  grid-area: notes;
+  display: grid;
+  
+}
+& #note-form {
+  display: grid;
+  width: 100%;
+  & input, textarea {
+    margin-block: var(--size-1);
+    width: 100%;
+  }
+  & ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  & .note-footer {
+    & .footer-inputs {
+      margin-top: var(--size-2);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--size-2);
+    }
+    & .footer-buttons {
+      display: flex;
+      justify-items: flex-end;
+      gap: var(--size-2);
+    }
+  }   
+}
+.sidebar {
+  grid-area: sidebar;
+  display: grid;
+  grid-area: sidebar;
+  justify-self: left;
+  & .project-container {
+    display: grid;
+    grid-template-rows: auto;
+    & .new-project-form {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    & .new-project-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & p {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+.card-container {
+  grid-area: cards;
+}
+
+
+
