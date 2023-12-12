@@ -1,40 +1,88 @@
 import './style.css'
-import { Project } from './Projects';
+import { Project, isProjectActive, activeProject, setActiveProjectName, saveProjects, projectsArray, setActiveProject, defaultProject } from './Projects';
 import { Card } from './Card';
+import Note from './Note';
 
 console.log('hi');
 const getNoteFormTemplate = document.querySelector(".note-form-template")
 const cloneNoteForm = getNoteFormTemplate.content.cloneNode(true)
 const getNoteContainer = document.querySelector(".note-form-container")
-getNoteContainer.append(cloneNoteForm)
+  getNoteContainer.append(cloneNoteForm)
 const saveNoteBtn = document.querySelector("button[id = note-save]")
-saveNoteBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  getNoteData()
-  console.log("Save note Button");
-  const noteForm = document.querySelector("#note-form")
-  noteForm.reset()
-})
+  saveNoteBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    //getNoteData()
+    const project = setActiveProject()
+    console.log(project);
+    console.log("Save note Button");
+    const noteForm = document.querySelector("#note-form")
+    console.log(noteForm);
+    const noteFormData = new FormData(noteForm)
+    console.log(noteFormData);
+    project.pushNotes(noteFormData)
+    // const newNote = new Note(noteFormData)
+    displayNoteInCard(noteFormData)
+    noteForm.reset()
+  })
+const cancelBtn = document.querySelector("#note-cancel")
+  cancelBtn.addEventListener("click", () => {
+    console.log("Cancel Button");
+    const noteForm = document.querySelector("#note-form")
+    noteForm.reset()
+  })
 
 const newProjectBtn = document.querySelector("button[class = new-project-btn]")
-newProjectBtn.addEventListener('click', (e) => {
-  const projectForm = document.querySelector("#new-project-form")
-  const projectName = document.querySelector("#new-project-input").value
-  const newProject = new Project(projectName)
-  projectForm.reset()
-})
-
-export function getNoteData() {
-  const noteData = {
-    title: document.getElementById("note-title").value,
-    content: document.getElementById("note-content").value,
-    tags: document.getElementById("note-tags").value,
-    date: document.getElementById("note-date").value,
-    color: document.getElementById("note-color").value
-  }
-  const noteCard = new Card(noteData)
-  
+  newProjectBtn.addEventListener('click', (e) => {
+    const projectForm = document.querySelector("#new-project-form")
+    const projectName = document.querySelector("#new-project-input").value
+    const newProject = new Project(projectName)
+    //saveProjects(newProject)
+    console.log(newProject.name);
+    setActiveProject(newProject)
+    //newProject.attachListenerToProjectName()
+    //console.log(newProject.displayNewProjectName(this.name));
+    projectForm.reset()
+  })
+export function displayProjects(project) {
+  console.log(project);
+  if (project.name === undefined) return
+  const getProjectList = document.querySelector(".project-container")
+  //Get Project card template
+  const getProjectTemplate = document.querySelector(".new-project")
+  const projectCard = getProjectTemplate.content.firstElementChild.cloneNode(true) 
+  console.log(projectCard);
+  const getProjectName = projectCard.querySelector('.project-name')
+  //console.log(project);
+  getProjectName.textContent = project.name
+  projectCard.id = project.name
+  console.log(projectCard);
+  getProjectName.addEventListener("click", (e) => {
+    e.preventDefault()
+    console.log(e, "SET ACTIVE PROJECT");
+    setActiveProject(project)
+    console.log(project.notes);
+    if (project.notes.length === 0) {
+      console.log("NO NOTES");
+      return
+    } else {
+      console.log("NOTES!", project.name);
+      console.log("NOTES -- ", project.name, project.notes);
+      displayNoteInCard(project.notes)
+    }
+  })
+  getProjectList.appendChild(projectCard)
+  deleteProject(project, projectCard)
+  return { project, projectCard }
 }
+export function deleteProject(project, projectCard) {
+  const deleteBtn = projectCard.querySelector(".delete-project-btn")
+  deleteBtn.addEventListener("click", () => {
+    const index = projectsArray.indexOf(project)
+    projectsArray.splice(index, 1)
+    projectCard.remove()
+  })
+}
+
 function displayNoteInCard(note) {
   const newNoteCard = new Card(note)
 }
