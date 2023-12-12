@@ -15,8 +15,8 @@
       <h3>Projects</h3>
       <section>
         <form action="" method="get" id="new-project-form">
-          <label for="new-project">
-            <input type="text" name="new-project" id="new-project-input" value="">
+          <label for="new-project-input">
+            <input type="text" name="new-project" id="new-project-input" >
           </label>
           <button class="new-project-btn" type="button">New Project</button>
         </form>
@@ -26,34 +26,34 @@
         <template class="new-project">
           <article class="new-project-card">
             <p class="project-name"></p>
-            <button type="button" class="delete-project">Delete</button>
+            <button type="button" class="delete-project-btn">Delete</button>
           </article>
-      </template>
+        </template>
       </section>
     </aside>
     <main class="main">
       <section class="note-form-container">
         <template class="note-form-template">
-          <form action="" id="note-form" class="note">
+          <form action="" method="post" id="note-form" class="note">
             <ul>
               <li>
-                <label for="title">
-                  <input class="note-form" id="note-title" name="title" type="text" placeholder="Title" value="" data-note="title">
+                <label for="note-title">
+                  <input class="note-form" id="note-title" name="title" type="text" placeholder="Title"  data-note="title">
                 </label>
               </li>
               <li>
-                <label for="content">
-                  <textarea class="note-form" id="note-content" name="content" placeholder="Take a note..." wrap="soft" value=""  data-note="content" autofocus></textarea>
+                <label for="note-content">
+                  <textarea class="note-form" id="note-content" name="content" placeholder="Take a note..." wrap="soft"   data-note="content" autofocus></textarea>
                 </label>
               </li>
               <li>
-                <label for="tags">
-                  <input class="note-form" id="note-tags" name="tags" type="text" placeholder="Tags: seperate by comma..." value=""  data-note="tags">
+                <label for="note-tags">
+                  <input class="note-form" id="note-tags" name="tags" type="text" placeholder="Tags: seperate by comma..."   data-note="tags">
                 </label>
               </li>
               <footer class="note-footer">
                 <div class="footer-inputs">
-                  <input type="date" name="date" id="note-date" class="note-form" value=""  data-note="date">
+                  <input type="date" name="due-date" id="note-date" class="note-form"   data-note="due-date">
                   <input type="color"name="color" id="note-color" class="note-form" value="#ffffff" data-note="color">
                 </div>
                 <div class="footer-buttons">
