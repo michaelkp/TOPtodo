@@ -35,17 +35,18 @@ const newProjectBtn = document.querySelector("button[class = new-project-btn]")
   newProjectBtn.addEventListener('click', (e) => {
     const projectForm = document.querySelector("#new-project-form")
     const projectName = document.querySelector("#new-project-input").value
-    const newProject = new Project(projectName)
-    //saveProjects(newProject)
-    console.log(newProject.name);
-    setActiveProject(newProject)
-    //newProject.attachListenerToProjectName()
-    //console.log(newProject.displayNewProjectName(this.name));
+    if (projectName === undefined || projectName === ''){
+      return
+    } else {
+      const newProject = new Project(projectName)
+      console.log(newProject.name);
+      setActiveProject(newProject)
+    }
     projectForm.reset()
   })
 export function displayProjects(project) {
   console.log(project);
-  if (project.name === undefined) return
+  if (project.name === undefined || project.name === '') return
   const getProjectList = document.querySelector(".project-container")
   //Get Project card template
   const getProjectTemplate = document.querySelector(".new-project")
@@ -67,12 +68,19 @@ export function displayProjects(project) {
     } else {
       console.log("NOTES!", project.name);
       console.log("NOTES -- ", project.name, project.notes);
-      displayNoteInCard(project.notes)
+      displayNoteInCard(project.notes, project.name)
     }
   })
   getProjectList.appendChild(projectCard)
+  //sortDisplayedProjects(project)
   deleteProject(project, projectCard)
-  return { project, projectCard }
+  //return { project, projectCard }
+}
+function sortDisplayedProjects(project) {
+  console.log("SORT =====");
+  console.log(project);
+  const card = document.getElementsByClassName("card")
+  console.log(card);
 }
 export function deleteProject(project, projectCard) {
   const deleteBtn = projectCard.querySelector(".delete-project-btn")
@@ -83,8 +91,8 @@ export function deleteProject(project, projectCard) {
   })
 }
 
-function displayNoteInCard(note) {
-  const newNoteCard = new Card(note)
+function displayNoteInCard(note, project) {
+  const newNoteCard = new Card(note, project)
 }
 
 function sendNoteToStorage() {

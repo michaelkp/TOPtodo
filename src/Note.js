@@ -1,9 +1,10 @@
 import { Project } from "./Projects";
 
 export default class Note extends Project {
-  constructor(note) {
+  constructor(note, name) {
     super()
-    this.notes = note
+    this.notes = note,
+    this.id = name
   }
   get note() {
     console.log("TEST IN NOTE");

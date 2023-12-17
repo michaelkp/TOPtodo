@@ -1,13 +1,13 @@
 import { getNoteData as note } from ".";
+import { activeProject } from "./Projects";
 
 export class Card {
-  constructor(note) {
-    this.note = note
-    this.displayNote = this.template(note)
+  constructor(note, project) {
+    this.displayNote = this.template(note, activeProject)
   }
 
-  template(note) {
-    // console.log(note);
+  template(note, activeProject) {
+    console.log(activeProject);
     // console.log(Array.from(note.entries()));
     const noteArray = Array.from(note.values())
     // let noteValues = Object.values(note)
@@ -15,6 +15,7 @@ export class Card {
     const noteCard = getNoteFormTemplate.content.firstElementChild.cloneNode(true)
     noteCard.classList.remove("note")
     noteCard.classList.add("card")
+    noteCard.classList.add(`${activeProject.name}`)
     let cardInputs = Array.from(noteCard.getElementsByClassName("note-form"))
     // for (var [key, value] of note.values()) { 
     //   console.log(key, value);

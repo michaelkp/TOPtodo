@@ -12,11 +12,10 @@
   
   <div class="container">
     <aside class="sidebar">
-      <h3>Projects</h3>
       <section>
         <form action="" method="get" id="new-project-form">
           <label for="new-project-input">
-            <input type="text" name="new-project" id="new-project-input" >
+            <input type="text" name="new-project" id="new-project-input" minlength="3">
           </label>
           <button class="new-project-btn" type="button">New Project</button>
         </form>
@@ -43,7 +42,7 @@
               </li>
               <li>
                 <label for="note-content">
-                  <textarea class="note-form" id="note-content" name="content" placeholder="Take a note..." wrap="soft"   data-note="content" autofocus></textarea>
+                  <section class="note-content"><textarea class="note-form" id="note-content" name="content" placeholder="Take a note..." wrap="soft"   data-note="content" autofocus></textarea></section>
                 </label>
               </li>
               <li>
@@ -52,9 +51,17 @@
                 </label>
               </li>
               <footer class="note-footer">
-                <div class="footer-inputs">
-                  <input type="date" name="due-date" id="note-date" class="note-form"   data-note="due-date">
-                  <input type="color"name="color" id="note-color" class="note-form" value="#ffffff" data-note="color">
+                <div class="new-content-buttons">
+                  <span class="new-note">
+                    <button type="button" class="new-note-btn">New Note</button>
+                  </span>
+                  <span class="new-list">
+                    <button type="button" class="new-list-btn"> New List</button>
+                  </span>
+                  <span class="due-date">
+                    <p class="due-date-text">Due Date: </p>
+                    <input type="date" name="due-date" id="note-date" class="note-form"   data-note="due-date">
+                  </span>
                 </div>
                 <div class="footer-buttons">
                   <button type="submit" id="note-save">Save</button>
