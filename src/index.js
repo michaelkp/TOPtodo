@@ -6,30 +6,33 @@ import Note from './Note';
 console.log('hi');
 const getNoteFormTemplate = document.querySelector(".note-form-template")
 const cloneNoteForm = getNoteFormTemplate.content.cloneNode(true)
+const getPostedDateSpan = cloneNoteForm.querySelector(".posted-date-section")
+  getPostedDateSpan.remove()
 const getNoteContainer = document.querySelector(".note-form-container")
+const saveNoteBtn = cloneNoteForm.querySelector("#note-save")
+const cancelBtn = cloneNoteForm.querySelector("#note-cancel")
   getNoteContainer.append(cloneNoteForm)
-const saveNoteBtn = document.querySelector("button[id = note-save]")
-  saveNoteBtn.addEventListener('click', (e) => {
-    e.preventDefault()
-    //getNoteData()
-    const project = setActiveProject()
-    console.log(project);
-    console.log("Save note Button");
-    const noteForm = document.querySelector("#note-form")
-    console.log(noteForm);
-    const noteFormData = new FormData(noteForm)
-    console.log(noteFormData);
-    project.pushNotes(noteFormData)
-    // const newNote = new Note(noteFormData)
-    displayNoteInCard(noteFormData)
-    noteForm.reset()
-  })
-const cancelBtn = document.querySelector("#note-cancel")
-  cancelBtn.addEventListener("click", () => {
-    console.log("Cancel Button");
-    const noteForm = document.querySelector("#note-form")
-    noteForm.reset()
-  })
+
+saveNoteBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  //getNoteData()
+  const project = setActiveProject()
+  console.log(project);
+  console.log("Save note Button");
+  const noteForm = document.querySelector("#note-form")
+  console.log(noteForm);
+  const noteFormData = new Note(noteForm)
+  console.log(noteFormData);
+  project.pushNotes(noteFormData)
+  // const newNote = new Note(noteFormData)
+  displayNoteInCard(noteFormData, project)
+  noteForm.reset()
+})
+cancelBtn.addEventListener("click", () => {
+  console.log("Cancel Button");
+  const noteForm = document.querySelector("#note-form")
+  noteForm.reset()
+})
 
 const newProjectBtn = document.querySelector("button[class = new-project-btn]")
   newProjectBtn.addEventListener('click', (e) => {
@@ -92,6 +95,8 @@ export function deleteProject(project, projectCard) {
 }
 
 function displayNoteInCard(note, project) {
+  console.log(note);
+  console.log(project);
   const newNoteCard = new Card(note, project)
 }
 
