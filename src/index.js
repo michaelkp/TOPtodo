@@ -16,7 +16,12 @@ const cancelBtn = cloneNoteForm.querySelector("#note-cancel")
 saveNoteBtn.addEventListener('click', (e) => {
   e.preventDefault()
   //getNoteData()
-  const project = setActiveProject()
+  let project
+  if (activeProject === undefined) {
+    project = setActiveProject()
+  } else{
+    project = activeProject//setActiveProject()
+  }
   console.log(project);
   console.log("Save note Button");
   const noteForm = document.querySelector("#note-form")
@@ -45,6 +50,8 @@ const newProjectBtn = document.querySelector("button[class = new-project-btn]")
       const newProject = new Project(projectName)
       console.log(newProject.name);
       setActiveProject(newProject)
+      console.log("ACTIVE PROJECT === ", activeProject);
+
     }
     projectForm.reset()
   })
@@ -67,6 +74,7 @@ export function displayProjects(project) {
   getProjectName.addEventListener("click", (e) => {
     e.preventDefault()
     console.log(e, "SET ACTIVE PROJECT");
+    console.log(project.name);
     setActiveProject(project)
     console.log("NOTES IN PROJECT");
     console.log(project.notes);
@@ -76,6 +84,7 @@ export function displayProjects(project) {
     } else {
       console.log("NOTES!", project.name);
       console.log("NOTES -- ", project.name, project.notes);
+      sortDisplayedProjects(project)
       // displayNoteInCard(project.notes, project.name)
     }
   })
@@ -87,8 +96,17 @@ export function displayProjects(project) {
 function sortDisplayedProjects(project) {
   console.log("SORT =====");
   console.log(project);
-  const card = document.getElementsByClassName("card")
-  console.log(card);
+  const cards = Array.from(document.getElementsByClassName("card"))
+  console.log(cards);
+  cards.forEach(card => card.remove())
+  console.log(project);
+  console.log(project.notes);
+  console.log(project.notes);
+  project.notes.forEach(note => {
+    console.log(note);
+    displayNoteInCard(note, project)
+  })
+  // displayNoteInCard(project.notes)
 }
 export function deleteProject(project, projectCard) {
   const deleteBtn = projectCard.querySelector(".delete-project-btn")

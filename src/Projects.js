@@ -2,9 +2,11 @@ import { makeNewProject, displayProjects, deleteProject } from ".";
 import { Card } from "./Card";
 export let isProjectActive = false
 export let activeProject
+console.log("ACTIVE PROJECT === ", activeProject);
 
 export function setActiveProject(project) {
   console.log(project);
+  // console.log(project.name);
   if (project === undefined || project.name === undefined) {
     console.log(project);
     return project = defaultProject

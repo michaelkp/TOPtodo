@@ -8,7 +8,7 @@ export class Card {
   template(note, project) {
     console.log(note.note);
     console.log(project);
-    console.log(project.notes);
+    // console.log(project.notes);
     const getNoteFormTemplate = document.querySelector(".note-form-template")
     const noteCard = getNoteFormTemplate.content.firstElementChild.cloneNode(true)
       noteCard.classList.remove("note")
