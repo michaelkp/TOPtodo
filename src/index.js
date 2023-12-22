@@ -23,7 +23,8 @@ saveNoteBtn.addEventListener('click', (e) => {
   console.log(noteForm);
   const noteFormData = new Note(noteForm)
   console.log(noteFormData);
-  project.pushNotes(noteFormData)
+  // console.log(project.push(noteFormData));
+  project.push(noteFormData)
   // const newNote = new Note(noteFormData)
   displayNoteInCard(noteFormData, project)
   noteForm.reset()
@@ -48,7 +49,10 @@ const newProjectBtn = document.querySelector("button[class = new-project-btn]")
     projectForm.reset()
   })
 export function displayProjects(project) {
+  console.log("DISPLAY PROJECT =================");
   console.log(project);
+  console.log(project.notes);
+
   if (project.name === undefined || project.name === '') return
   const getProjectList = document.querySelector(".project-container")
   //Get Project card template
@@ -64,6 +68,7 @@ export function displayProjects(project) {
     e.preventDefault()
     console.log(e, "SET ACTIVE PROJECT");
     setActiveProject(project)
+    console.log("NOTES IN PROJECT");
     console.log(project.notes);
     if (project.notes.length === 0) {
       console.log("NO NOTES");
@@ -71,7 +76,7 @@ export function displayProjects(project) {
     } else {
       console.log("NOTES!", project.name);
       console.log("NOTES -- ", project.name, project.notes);
-      displayNoteInCard(project.notes, project.name)
+      // displayNoteInCard(project.notes, project.name)
     }
   })
   getProjectList.appendChild(projectCard)

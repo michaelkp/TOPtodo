@@ -1,4 +1,5 @@
 import { makeNewProject, displayProjects, deleteProject } from ".";
+import { Card } from "./Card";
 export let isProjectActive = false
 export let activeProject
 
@@ -14,12 +15,13 @@ export function setActiveProject(project) {
 }
 
 export class Project {
-  constructor(name, notes) {
+  constructor(name) {
     this.name = name,
     this.notes = [],
-    this.isActive = isProjectActive = true
-    this.pushProject()    
-    this.display()
+    this.isActive = isProjectActive = true,
+    this.pushProject(),    
+    this.display(),
+    // this.displayNote(this.notes),
     this.activeProject = activeProject
   }
   display() {
@@ -34,16 +36,26 @@ export class Project {
       console.log("PUSH TO PROJECT ARRAY");
     }  
   }
-  pushNotes(note) {
+  push(note) {
+    console.log("PUSH ===============");
     console.log(note);
-    console.log(activeProject);
+    console.log(note.note);
+    // console.log(activeProject);
     if (activeProject === undefined) {
       console.log("active projet");
       activeProject = defaultProject;
     } 
-    activeProject.notes.push(note)
-    console.log(activeProject);
+    this.notes.push(note)
+    // console.log(activeProject);
   }
+  // displayNote(notes) {
+  //   console.log("DISPLAY NOTE =============");
+  //   console.log(notes);
+  //   for (let i = 0; i <= notes.length; i++) {
+  //     console.log(notes[i]);
+  //     // const sendNoteToCard = new Card(notes[i])
+  //   }
+  // }
 }
 export const projectsArray = []
 export function addProjectToArray(project) {

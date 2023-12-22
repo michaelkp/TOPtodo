@@ -2,47 +2,44 @@ import { activeProject } from "./Projects";
 
 export class Card {
   constructor(note, project) {
-    this.displayNote = this.template(note, activeProject)
-    // this.changeSaveBtnToEditBtn = this.changeSaveBtnToEditBtn( project)
+    this.displayNote = this.template(note, project, activeProject)
+    // this.editBtn = this.editBtn(project)
   }
-  
-  template(project) {
-    const noteArray = Array.from(project.notes.values())
-    console.log(noteArray);
+  template(note, project) {
+    console.log(note.note);
+    console.log(project);
+    console.log(project.notes);
     const getNoteFormTemplate = document.querySelector(".note-form-template")
     const noteCard = getNoteFormTemplate.content.firstElementChild.cloneNode(true)
-    noteCard.classList.remove("note")
-    noteCard.classList.add("card")
-    noteCard.classList.add(`${project.name}`)
+      noteCard.classList.remove("note")
+      noteCard.classList.add("card")
+      noteCard.classList.add(`${project.name}`)
     const getPostedDateSpan = noteCard.querySelector(".posted-date")
-      getPostedDateSpan.textContent = `${project.notes.get("date")}`
+      getPostedDateSpan.textContent = `${note.date}`
     const cardInputs = Array.from(noteCard.getElementsByClassName("note-form"))
-      for(let i = 0; i < noteArray.length - 1; i++) {
-        cardInputs[i].value = noteArray[i]
-      }
-    const getCardContainer = document.querySelector(".card-container")
+    const noteValues = Array.from(note.note.values())
+      cardInputs.forEach((input, i) => {
+        input.value = noteValues[i]
+      })
+     const getCardContainer = document.querySelector(".card-container")
       getCardContainer.appendChild(noteCard)
-      this.editBtn(noteCard, project)
+      this.editBtn(note, noteCard, project, getPostedDateSpan)
   }
-  editBtn(noteCard, project) {
-    console.log("CARD +++++++");
-    console.log(noteCard);
-    console.log(project);
-    const postedDate = project._date
-    console.log(postedDate);
+  editBtn(note, noteCard, project) {
     const editBtn = noteCard.querySelector(".card #note-save")
-    editBtn.textContent = "Edit"
-    editBtn.addEventListener("click", (e) => {
-      e.preventDefault()
-      console.log("EDIT BTN ========");
-      console.log(project);
-      console.log(noteCard);
-      console.log(project._date);
-      const card = Array.from(noteCard)
-      console.log(card);
-      const [date, title, note, ...rest] = card
-      console.log(date);
-      console.log("edit btn in card");
-    })
-  }
+      editBtn.textContent = "Edit"
+      editBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        const projectNotes = project.notes
+          if (projectNotes.indexOf(note) === note.id) {
+            const currentNoteValues = noteCard.querySelectorAll(".note-form")
+              currentNoteValues.forEach(input => {
+                let oldNoteValue = note.note.get(`${input.name}`)
+                if (input.value != oldNoteValue) {
+                  note.note.set(`${input.name}`, input.value)
+                }
+            })
+        }
+      })
+    }
 }
