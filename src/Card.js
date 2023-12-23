@@ -1,5 +1,5 @@
 import { activeProject } from "./Projects";
-
+console.log("CARD");
 export class Card {
   constructor(note, project) {
     this.displayNote = this.template(note, project, activeProject)
@@ -11,14 +11,35 @@ export class Card {
     // console.log(project.notes);
     const getNoteFormTemplate = document.querySelector(".note-form-template")
     const noteCard = getNoteFormTemplate.content.firstElementChild.cloneNode(true)
+    console.log(noteCard);
       noteCard.classList.remove("note")
       noteCard.classList.add("card")
       noteCard.classList.add(`${project.name}`)
+    // const projectList = noteCard.querySelector(".note-projects")
+    // console.log(projectList);
+    // const select = noteCard.querySelector("select")
+    // console.log(select);
+    //   select.remove()
+    // const projectSpan = document.createElement("span")
+    //   projectSpan.type = input
+    //   projectList.appendChild(projectSpan)
+    //   console.log(projectSpan);
     const getPostedDateSpan = noteCard.querySelector(".posted-date")
       getPostedDateSpan.textContent = `${note.date}`
     const cardInputs = Array.from(noteCard.getElementsByClassName("note-form"))
     const noteValues = Array.from(note.note.values())
       cardInputs.forEach((input, i) => {
+        console.log(noteValues[i]);
+        console.log(input.classList);
+        if (input.classList.contains("note-projects")) {
+          console.log("SELECT=====");
+          const projectList = noteCard.querySelector(".note-projects")
+          const select = noteCard.querySelector("select")
+          select.remove()
+          const projectSpan = document.createElement("span")
+          projectSpan.textContent = noteValues[i]
+          projectList.appendChild(projectSpan)
+        }
         input.value = noteValues[i]
       })
      const getCardContainer = document.querySelector(".card-container")

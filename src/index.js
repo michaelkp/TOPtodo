@@ -11,6 +11,26 @@ const getPostedDateSpan = cloneNoteForm.querySelector(".posted-date-section")
 const getNoteContainer = document.querySelector(".note-form-container")
 const saveNoteBtn = cloneNoteForm.querySelector("#note-save")
 const cancelBtn = cloneNoteForm.querySelector("#note-cancel")
+const selectProject = cloneNoteForm.querySelector("#note-projects")
+export function addProjectToSelectMenu(project) {
+    console.log(selectProject);
+    const option = document.createElement("option")
+    selectProject.appendChild(option)
+    option.textContent = `${project.name}`
+    const optionList = selectProject.querySelectorAll("option")
+    console.log(optionList);
+    selectProject.addEventListener("change", () => {
+      console.log("OPTION ======", option);
+      option.setAttribute("selected", true)
+      setActiveProject(option.value)
+    })
+    // optionList.forEach(option => {
+    //   console.log(option.value);
+    //   option.addEventListener("change", () => {
+    //     console.log("OPTION ==========");
+    //   })
+    // })
+}
   getNoteContainer.append(cloneNoteForm)
 
 saveNoteBtn.addEventListener('click', (e) => {
@@ -39,7 +59,6 @@ cancelBtn.addEventListener("click", () => {
   const noteForm = document.querySelector("#note-form")
   noteForm.reset()
 })
-
 const newProjectBtn = document.querySelector("button[class = new-project-btn]")
   newProjectBtn.addEventListener('click', (e) => {
     const projectForm = document.querySelector("#new-project-form")
@@ -51,6 +70,7 @@ const newProjectBtn = document.querySelector("button[class = new-project-btn]")
       console.log(newProject.name);
       setActiveProject(newProject)
       console.log("ACTIVE PROJECT === ", activeProject);
+      addProjectToSelectMenu(newProject)
 
     }
     projectForm.reset()
