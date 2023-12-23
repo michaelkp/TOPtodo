@@ -24,23 +24,16 @@ export function addProjectToSelectMenu(project) {
       option.setAttribute("selected", true)
       setActiveProject(option.value)
     })
-    // optionList.forEach(option => {
-    //   console.log(option.value);
-    //   option.addEventListener("change", () => {
-    //     console.log("OPTION ==========");
-    //   })
-    // })
 }
   getNoteContainer.append(cloneNoteForm)
 
 saveNoteBtn.addEventListener('click', (e) => {
   e.preventDefault()
-  //getNoteData()
   let project
   if (activeProject === undefined) {
     project = setActiveProject()
   } else{
-    project = activeProject//setActiveProject()
+    project = activeProject
   }
   console.log(project);
   console.log("Save note Button");
@@ -48,9 +41,7 @@ saveNoteBtn.addEventListener('click', (e) => {
   console.log(noteForm);
   const noteFormData = new Note(noteForm)
   console.log(noteFormData);
-  // console.log(project.push(noteFormData));
   project.push(noteFormData)
-  // const newNote = new Note(noteFormData)
   displayNoteInCard(noteFormData, project)
   noteForm.reset()
 })
@@ -98,15 +89,15 @@ export function displayProjects(project) {
     setActiveProject(project)
     console.log("NOTES IN PROJECT");
     console.log(project.notes);
-    if (project.notes.length === 0) {
-      console.log("NO NOTES");
-      return
-    } else {
-      console.log("NOTES!", project.name);
-      console.log("NOTES -- ", project.name, project.notes);
-      sortDisplayedProjects(project)
-      // displayNoteInCard(project.notes, project.name)
-    }
+    sortDisplayedProjects(project)
+    // if (project.notes.length === 0) {
+    //   console.log("NO NOTES");
+    //   return
+    // } else {
+    //   console.log("NOTES!", project.name);
+    //   console.log("NOTES -- ", project.name, project.notes);
+    //   // displayNoteInCard(project.notes, project.name)
+    // }
   })
   getProjectList.appendChild(projectCard)
   //sortDisplayedProjects(project)
