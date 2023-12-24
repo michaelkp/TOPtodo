@@ -12,6 +12,22 @@ const getNoteContainer = document.querySelector(".note-form-container")
 const saveNoteBtn = cloneNoteForm.querySelector("#note-save")
 const cancelBtn = cloneNoteForm.querySelector("#note-cancel")
 const selectProject = cloneNoteForm.querySelector("#note-projects")
+const showAllNotesBtn = document.querySelector(".projects-all-notes")
+console.log(showAllNotesBtn);
+showAllNotesBtn.addEventListener("click", () => {
+  console.log("SHOW ALL ======");
+  console.log(projectsArray);
+  projectsArray.forEach(project => {
+    console.log(project);
+    
+    console.log(project.notes);
+    const notes = project.notes
+    notes.forEach(note => {
+      console.log(note);
+      displayNoteInCard(note, project.name)
+    })
+  })
+})
 export function addProjectToSelectMenu(project) {
     console.log(selectProject);
     const option = document.createElement("option")

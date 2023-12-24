@@ -6,6 +6,7 @@ export class Card {
     // this.editBtn = this.editBtn(project)
   }
   template(note, project) {
+    console.log(note);
     console.log(note.note);
     console.log(project);
     // console.log(project.notes);
@@ -45,6 +46,8 @@ export class Card {
      const getCardContainer = document.querySelector(".card-container")
       getCardContainer.appendChild(noteCard)
       this.editBtn(note, noteCard, project, getPostedDateSpan)
+      this.deleteBtn(note, noteCard, project, getPostedDateSpan)
+
   }
   editBtn(note, noteCard, project) {
     const editBtn = noteCard.querySelector(".card #note-save")
@@ -63,4 +66,16 @@ export class Card {
         }
       })
     }
+    deleteBtn(note, noteCard, project) {
+      const deleteBtn = noteCard.querySelector(".card #note-cancel")
+        deleteBtn.textContent = "Delete"
+        deleteBtn.addEventListener("click", (e) => {
+          e.preventDefault()
+          console.log("DELETE ==========");
+          const projectNotes = project.notes
+          let i = projectNotes.indexOf(note)
+          projectNotes.splice(i, 1)
+          noteCard.remove()
+        })
+      }
 }
