@@ -51,12 +51,18 @@
                     </section>
                   </label>
               </li>
-              <li>
+              <li class="note-options">
                 <label for="note-projects" class="note-projects">Project: 
-                  <!-- <input class="note-form" id="note-tags" name="tags" type="text" placeholder="Tags: seperate by comma..."   data-note="tags"> -->
+                  <select name="projects" id="note-projects" class="note-form note-projects">
+                    <option value="Default">Default</option>
+                  </select>
                 </label>
-                <select name="projects" id="note-projects" class="note-form note-projects">
-                  <option value="Default">Default</option>
+                <label for="note-priority">Priority: </label>
+                <select name="priority" id="note-priority" class="note-form note-priority">
+                  <option value="" class="note-priority">Choose a priority: </option>
+                  <option value="low" class="note-priority">Low</option>
+                  <option value="medium" class="note-priority">Medium</option>
+                  <option value="high" class="note-priority">High</option>
                 </select>
               </li>
               <footer class="note-footer">
