@@ -16,6 +16,8 @@ export class Card {
       noteCard.classList.remove("note")
       noteCard.classList.add("card")
       noteCard.classList.add(`${project.name}`)
+      console.log(note.displayed);
+      note.displayed = true
     // const projectList = noteCard.querySelector(".note-projects")
     // console.log(projectList);
     // const select = noteCard.querySelector("select")
@@ -72,6 +74,7 @@ export class Card {
         deleteBtn.addEventListener("click", (e) => {
           e.preventDefault()
           console.log("DELETE ==========");
+          note.displayed = false
           const projectNotes = project.notes
           let i = projectNotes.indexOf(note)
           projectNotes.splice(i, 1)

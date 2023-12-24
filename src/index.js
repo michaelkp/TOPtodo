@@ -17,14 +17,12 @@ console.log(showAllNotesBtn);
 showAllNotesBtn.addEventListener("click", () => {
   console.log("SHOW ALL ======");
   console.log(projectsArray);
+  const cards = Array.from(document.getElementsByClassName("card"))
+    cards.forEach(card => card.remove())
   projectsArray.forEach(project => {
-    console.log(project);
-    
-    console.log(project.notes);
     const notes = project.notes
     notes.forEach(note => {
-      console.log(note);
-      displayNoteInCard(note, project.name)
+        displayNoteInCard(note, project.name)
     })
   })
 })
@@ -106,34 +104,17 @@ export function displayProjects(project) {
     console.log("NOTES IN PROJECT");
     console.log(project.notes);
     sortDisplayedProjects(project)
-    // if (project.notes.length === 0) {
-    //   console.log("NO NOTES");
-    //   return
-    // } else {
-    //   console.log("NOTES!", project.name);
-    //   console.log("NOTES -- ", project.name, project.notes);
-    //   // displayNoteInCard(project.notes, project.name)
-    // }
   })
   getProjectList.appendChild(projectCard)
-  //sortDisplayedProjects(project)
   deleteProject(project, projectCard)
-  //return { project, projectCard }
 }
 function sortDisplayedProjects(project) {
   console.log("SORT =====");
-  console.log(project);
   const cards = Array.from(document.getElementsByClassName("card"))
-  console.log(cards);
   cards.forEach(card => card.remove())
-  console.log(project);
-  console.log(project.notes);
-  console.log(project.notes);
   project.notes.forEach(note => {
-    console.log(note);
     displayNoteInCard(note, project)
   })
-  // displayNoteInCard(project.notes)
 }
 export function deleteProject(project, projectCard) {
   const deleteBtn = projectCard.querySelector(".delete-project-btn")
