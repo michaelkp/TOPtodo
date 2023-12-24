@@ -118,10 +118,35 @@ function sortDisplayedProjects(project) {
 }
 export function deleteProject(project, projectCard) {
   const deleteBtn = projectCard.querySelector(".delete-project-btn")
+  const deleteDialog = document.querySelector("dialog")
   deleteBtn.addEventListener("click", () => {
-    const index = projectsArray.indexOf(project)
-    projectsArray.splice(index, 1)
-    projectCard.remove()
+    console.log("DELETE ======================");
+    console.log(project);
+    deleteDialog.showModal()
+    const cancelDialog = document.querySelector(".cancel-delete-project-btn")
+      cancelDialog.addEventListener("click", () => {
+        deleteDialog.close()
+        return
+      })
+    const deleteProjectInDialog = document.querySelector(".delete-project-dialog-btn")
+      deleteProjectInDialog.addEventListener("click", () => {
+        deleteDialog.close()
+        deleteProjectAfterDialog()
+      })
+    function deleteProjectAfterDialog() {
+      const displayedNotes = document.querySelectorAll(".card")
+      console.log(displayedNotes);
+      displayedNotes.forEach(note => {
+        console.log(note.classList);
+        if(note.classList.contains(project.name)) {
+          console.log(`${project.name}`);
+          note.remove()
+        }
+      })
+      const index = projectsArray.indexOf(project)
+      projectsArray.splice(index, 1)
+      projectCard.remove()
+    }
   })
 }
 

@@ -16,17 +16,13 @@ body, html {
 .container {
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: .5fr repeat(2, 1fr);
   grid-template-rows: 1fr, auto;
 }
 .main {
-  outline: 1px solid blue;
   height: 100vh;
   grid-column: 2 / 4;
   grid-row: 1 / 3;
-}
-.note-form-container {
-  outline: 1px solid olive;
 }
 #note-form {
   display: grid;
@@ -47,9 +43,6 @@ body, html {
       padding: 0;
       max-width: 100%;
     } 
-    /* & .note-footer {
-      display: flex;
-    } */
     & footer {
       display: flex;
       gap: var(--size-2);
@@ -80,8 +73,6 @@ body, html {
       }
     }
 }
-
- 
 .card {
   display: grid;
   width: 100%;
@@ -113,34 +104,33 @@ body, html {
   padding: var(--size-fluid-1);
   grid-column: 1 / 2;
   grid-row: 1 / 2;
+  max-width: fit-content;
   & #new-project-form {
       display: flex;
       gap: var(--size-2);
       justify-content: space-between;
       align-items: center;
       & input {
-        line-height: 3rem;
+        max-width: 100%;
       }
     }
   & .project-container {
     display: grid;
     gap: var(--size-2);
     & .new-project-card {
-      outline: 1px solid teal;
+      border: var(--size-1) solid var(--gray-3);
+      border-radius: var(--size-fluid-2);
+      padding: .65rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      & p {
-        /* font-size: 1.25rem; */
-      }
     }
   }
 }
-
 .card-container {
   grid-area: cards;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: .5rem;
   margin-top: var(--size-3);
 }

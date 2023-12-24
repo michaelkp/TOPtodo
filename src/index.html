@@ -22,6 +22,11 @@
       </section>
       <section class="project-container">
         <h3>Projects</h3>
+        <dialog class="delete-project-dialog">
+          <p class="dialog-message">Clicking Delete will delete all notes and the project. Do you want to delete the project?</p>
+          <button class="delete-project-dialog-btn">Delete</button>
+          <button class="cancel-delete-project-btn">Cancel</button>
+        </dialog>
         <button type="button" class="projects-all-notes">Show All Notes</button>
         <template class="new-project">
           <article class="new-project-card">
@@ -86,10 +91,12 @@
         </template>
       </section>
       <section class="card-container">
+        <dialog class="edit-note-dialog">
+          <p class="edit-dialog">Edit has been saved!</p>
+          <button type="button" class="close-edit-btn">Close</button>
+        </dialog>
       </section>
     </main>
   </div>
-
-
 </body>
 </html>

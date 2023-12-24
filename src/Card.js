@@ -76,35 +76,45 @@ export class Card {
                 }
               }
               note.note.set(`${input.name}`, input.value)
+              showEditDialog()
             }
           })
+          function showEditDialog() {
+            const editDialog = document.querySelector(".edit-note-dialog")
+              editDialog.showModal()
+          }
+          const closeEditDialogBtn = document.querySelector(".close-edit-btn")
+          const editDialog = document.querySelector(".edit-note-dialog")
+            closeEditDialogBtn.addEventListener("click", () => {
+              editDialog.close()
+            })
       })
   } 
-    deleteBtn(note, noteCard, project) {
-      const deleteBtn = noteCard.querySelector(".card #note-cancel")
-        deleteBtn.textContent = "Delete"
-        deleteBtn.addEventListener("click", (e) => {
-          e.preventDefault()
-          console.log("DELETE ==========");
-          note.displayed = false
-          const projectNotes = project.notes
-          let i = projectNotes.indexOf(note)
-          projectNotes.splice(i, 1)
-          noteCard.remove()
-        })
-      }
-      borderColor(val, card) {
-        switch (val) {
-          case "low":
-            card.style.borderColor = "var(--teal-3)"
-            break;
-          case "medium":
-            card.style.borderColor = "var(--yellow-3)"
-            break;
-          case "high":
-            card.style.borderColor = "var(--red-3)"
-          default:
-            break;
-        }
-      }
+  deleteBtn(note, noteCard, project) {
+    const deleteBtn = noteCard.querySelector(".card #note-cancel")
+      deleteBtn.textContent = "Delete"
+      deleteBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        console.log("DELETE ==========");
+        note.displayed = false
+        const projectNotes = project.notes
+        let i = projectNotes.indexOf(note)
+        projectNotes.splice(i, 1)
+        noteCard.remove()
+      })
+    }
+  borderColor(val, card) {
+    switch (val) {
+      case "low":
+        card.style.borderColor = "var(--teal-3)"
+        break;
+      case "medium":
+        card.style.borderColor = "var(--yellow-3)"
+        break;
+      case "high":
+        card.style.borderColor = "var(--red-3)"
+      default:
+        break;
+    }
+  }
 }
