@@ -22,7 +22,7 @@ showAllNotesBtn.addEventListener("click", () => {
   projectsArray.forEach(project => {
     const notes = project.notes
     notes.forEach(note => {
-        displayNoteInCard(note, project.name)
+        displayNoteInCard(note, project)
     })
   })
 })

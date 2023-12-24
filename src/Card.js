@@ -62,31 +62,24 @@ export class Card {
       editBtn.addEventListener("click", (e) => {
         e.preventDefault()
         const projectNotes = project.notes
-          if (projectNotes.indexOf(note) === note.id) {
-            const currentNoteValues = noteCard.querySelectorAll(".note-form")
-              currentNoteValues.forEach(input => {
-                let oldNoteValue = note.note.get(`${input.name}`)
-                if (input.value != oldNoteValue) {
-                  console.log(input.value);
-                  console.log(note.note);
-                  if (input.value === "low" || input.value === "medium" || input.value === "high") {
-                    console.log("PRIORITY ============");
-                    // console.log(noteValues);
-                    this.borderColor(input.value, noteCard)
-                    const selectMenu = noteCard.querySelector(".note-priority")
-                    console.log(selectMenu.options);
-                    for(const option of selectMenu) {
-                      if (option.value === input.value) {
-                        option.setAttribute("selected", true)
-                      }
-                    }
+        const currentNoteValues = noteCard.querySelectorAll(".note-form")
+          currentNoteValues.forEach(input => {
+            let oldNoteValue = note.note.get(`${input.name}`)
+            if (input.value != oldNoteValue) {
+              if (input.value === "low" || input.value === "medium" || input.value === "high") {
+                this.borderColor(input.value, noteCard)
+                const selectMenu = noteCard.querySelector(".note-priority")
+                for(const option of selectMenu) {
+                  if (option.value === input.value) {
+                    option.setAttribute("selected", true)
                   }
-                  note.note.set(`${input.name}`, input.value)
                 }
-            })
-        }
+              }
+              note.note.set(`${input.name}`, input.value)
+            }
+          })
       })
-    }
+  } 
     deleteBtn(note, noteCard, project) {
       const deleteBtn = noteCard.querySelector(".card #note-cancel")
         deleteBtn.textContent = "Delete"
